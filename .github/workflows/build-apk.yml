@@ -22,7 +22,10 @@ jobs:
           java-version: '17'
 
       - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+        uses: android-actions/setup-android@v4
+        with:
+          packages: 'platform-tools'
+          log-accepted-android-sdk-licenses: 'false'
 
       - name: Install API 35 platform
         run: sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
@@ -38,7 +41,7 @@ jobs:
       - name: Prepare output
         run: cp app/build/outputs/apk/debug/app-debug.apk ELYAS_LIGHT_CONTROL_v1.0.apk
 
-      - name: Download APK from this run
+      - name: Download APK
         uses: actions/upload-artifact@v4
         with:
           name: ELYAS_LIGHT_CONTROL_ANDROID_APK
